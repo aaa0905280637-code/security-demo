@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#14090c">
+  <title>Security Simulation</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: max(24px, env(safe-area-inset-top))
+               20px
+               max(24px, env(safe-area-inset-bottom));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #14090c;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", sans-serif;
+    }
+
+    .panel {
+      width: 100%;
+      max-width: 440px;
+      border: 1px solid #702833;
+      border-radius: 22px;
+      padding: 26px 22px;
+      background: linear-gradient(160deg, #271015, #170b0e);
+      box-shadow: 0 0 35px #ff26301a;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid #ff555566;
+      border-radius: 8px;
+      color: #ff7979;
+      background: #ff33330d;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .icon {
+      margin: 25px 0 14px;
+      font-size: 56px;
+      text-align: center;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    h1 {
+      margin: 0;
+      color: #ff5a62;
+      font-size: 27px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .description {
+      margin: 15px 0 25px;
+      color: #e9b9bf;
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .notice {
+      margin-bottom: 22px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #3b1720;
+      color: #ffd1d5;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    #percent {
+      color: #ff666e;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .track {
+      width: 100%;
+      height: 10px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #54212b;
+    }
+
+    #bar {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ff343d, #ff8585);
+      transition: width 0.15s linear;
+    }
+
+    #status {
+      min-height: 42px;
+      margin: 16px 0;
+      color: #f5b9bf;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .checks {
+      display: grid;
+      gap: 12px;
+      margin: 20px 0;
+      padding: 16px;
+      border: 1px solid #54212b;
+      border-radius: 12px;
+      background: #1d0d11;
+    }
+
+    .check {
+      display: flex;
+      gap: 10px;
+      color: #e9d6d9;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .check span:first-child {
+      color: #86efac;
+    }
+
+    button {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
+      background: #e73542;
+      color: white;
+      font-size: 15px;
+      font-weight: 750;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: #b78a90;
+      font-size: 11px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(1.06); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .icon { animation: none; }
+      #bar { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="panel">
+    <div class="badge">SIMULATION ONLY</div>
+
+    <div class="icon" aria-hidden="true">⚠️</div>
+
+    <h1 id="heading">Security Simulation</h1>
+
+    <p class="description">
+      Experience a fictional cybersecurity warning
+      in a safe, simulated environment.
+    </p>
+
+    <div class="notice">
+      DEMO MODE — No real threats are detected.
+      This page does not scan your iPhone.
+    </div>
+
+    <div class="progress-header">
+      <span>Demo progress</span>
+      <span id="percent">0%</span>
+    </div>
+
+    <div class="track"
+         role="progressbar"
+         aria-label="Simulation progress"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         aria-valuenow="0"
+         id="progress">
+      <div id="bar"></div>
+    </div>
+
+    <p id="status" aria-live="polite">
+      Ready to start the visual demonstration.
+    </p>
+
+    <div class="checks">
+      <div class="check">
+        <span>✓</span>
+        <span>No personal data accessed</span>
+      </div>
+      <div class="check">
+        <span>✓</span>
+        <span>No information collected or transmitted</span>
+      </div>
+      <div class="check">
+        <span>✓</span>
+        <span>No apps installed or device settings changed</span>
+      </div>
+    </div>
+
+    <button id="start" type="button">
+      Start 20-Second Demo
+    </button>
+
+    <div class="footer">
+      EDUCATIONAL VISUAL DEMONSTRATION<br>
+      This is not a real security scan or infection alert.
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const duration = 20000;
+      const button = document.getElementById("start");
+      const bar = document.getElementById("bar");
+      const percent = document.getElementById("percent");
+      const status = document.getElementById("status");
+      const heading = document.getElementById("heading");
+      const progress = document.getElementById("progress");
+
+      let timer = null;
+      let startedAt = 0;
+
+      const messages = [
+        [0, "Initializing visual demonstration..."],
+        [20, "Displaying fictional security indicators..."],
+        [45, "Animating simulated warning graphics..."],
+        [70, "Continuing the visual demonstration..."],
+        [90, "Preparing the demo completion screen..."]
+      ];
+
+      function finish() {
+        clearInterval(timer);
+        timer = null;
+
+        bar.style.width = "100%";
+        percent.textContent = "100%";
+        progress.setAttribute("aria-valuenow", "100");
+
+        heading.textContent = "Demo Complete";
+        status.textContent =
+          "Simulation finished. No device scan or security changes occurred.";
+
+        button.textContent = "Replay Demonstration";
+        button.disabled = false;
+      }
+
+      function startDemo() {
+        if (timer !== null) {
+          clearInterval(timer);
+        }
+
+        let currentMessage = -1;
+        startedAt = Date.now();
+
+        button.disabled = true;
+        button.textContent = "Demo Running...";
+        heading.textContent = "Security Simulation";
+        bar.style.width = "0%";
+        percent.textContent = "0%";
+        progress.setAttribute("aria-valuenow", "0");
+        status.textContent = messages[0][1];
+
+        timer = setInterval(() => {
+          const elapsed = Date.now() - startedAt;
+          const value = Math.min(
+            100,
+            Math.floor((elapsed / duration) * 100)
+          );
+
+          bar.style.width = value + "%";
+          percent.textContent = value + "%";
+          progress.setAttribute("aria-valuenow", String(value));
+
+          for (let i = messages.length - 1; i >= 0; i--) {
+            if (value >= messages[i][0]) {
+              if (currentMessage !== i) {
+                currentMessage = i;
+                status.textContent = messages[i][1];
+              }
+              break;
+            }
+          }
+
+          if (elapsed >= duration) {
+            finish();
+          }
+        }, 100);
+      }
+
+      button.addEventListener("click", startDemo);
+    })();
+  </script>
+</body>
+</html>
